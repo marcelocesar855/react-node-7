@@ -1,14 +1,50 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <style>
+            .exec {
+                border: 1px solid black;
+                margin: 5px;
+            }
+        </style>
     </head>
     <title>Curso Javascript</title>
     <body>        
         <div id='app'>
-
+            <div id='exec1' class="exec">
+                <button onclick="createBox()">Adicionar box</button>
+            </div>
         </div>
         <script>
-        
+            var id = 1
+
+            function createBox() {
+                var boxElement = document.createElement('div')
+                boxElement.style.width = 100;
+                boxElement.style.height = 100;
+                boxElement.style.margin = 5;
+                boxElement.style.backgroundColor = '#f00';
+                boxElement.setAttribute('onmouseover', 'changeColor(this)')
+                boxElement.setAttribute('id', id)
+                var containerElement = document.querySelector('#exec1')
+                containerElement.appendChild(boxElement)
+                id++
+            }
+
+            function changeColor(element) {
+                var id = element.id
+                var box = document.getElementById(id)
+                box.style.backgroundColor = getRandomColor()
+            }
+
+            function getRandomColor() {
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
         </script>
     </body>
 </html>
