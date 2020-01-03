@@ -28,3 +28,24 @@ function exerc3(skills) {
     }
     return false
 }
+
+function exerc4(anos) {
+    if (anos > 0 && anos < 2) {
+        return 'Iniciante'
+    }else if (anos > 1 && anos < 4) {
+        return 'Intermediário'
+    }else if (anos > 3 && anos < 7) {
+        return 'Avançado'
+    }else if (anos > 6) {
+        return 'Jedi Master'
+    }else {
+        return 'Númmero inválido'
+    }
+}
+
+function exerc5(usuarios) {
+    var arrayJson = JSON.parse(usuarios);
+    arrayJson.forEach(function(usuario){
+        console.log(`O ${usuario.nome} possui as habilidades: ${usuario.habilidades.join(', ')}`)
+    })
+}
