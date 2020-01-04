@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            .exec {
+                border: 1px solid black;
+                margin: 5px;
+            }
+
+            #load {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <title>Curso Javascript</title>
+    <body>        
+        <div id='app'>
+            <div id='exec1' class="exec">
+                <input type="text" id="user">
+                <button onclick="adicionarGit()">Adicionar Git</button>
+                <li id='load'>Carregando...</li>
+            </div>
+        </div>
+        <script>
+            function checaIdade(idade) {
+                return new Promise(function(resolve, reject){
+                    if(idade > 18){
+                        resolve()
+                    }else{
+                        reject()
+                    }
+                })
+            }
+
+            checaIdade(20)
+            .then(user => {
+                return new Promise(resolve => setTimeout(() => resolve(user), 2000));
+            })
+            .then(function() {
+            console.log("Maior que 18");
+            })
+            .catch(function() {
+            console.log("Menor que 18");
+            });
+
+            function adicionarGit() {
+                var containerElement = document.querySelector('#exec1') 
+                var loadElement = document.querySelector('#load')
+                var nome = document.getElementById('user').value
+                if (nome != ''){                        
+                    var xhr = new XMLHttpRequest()
+                    xhr.open('GET',`https://api.github.com/users/${nome}/repos`)
+                    xhr.send(null)
+                    xhr.onreadystatechange = function (){
+                        if(xhr.readyState === 4){
+                            if(xhr.status === 200) {
+                                var resp = JSON.parse(xhr.responseText)
+                                var listElement = document.createElement('ul')
+                                for (i = 0; i < resp.length; i++) {
+                                    var listItem = document.createElement('li')
+                                    var textItem = document.createTextNode(resp[i].full_name)
+                                    listItem.appendChild(textItem)
+                                    listElement.appendChild(listItem)
+                                    loadElement.style.visibility = 'hidden'
+                                }
+                                containerElement.appendChild(listElement)
+                            }else{
+                                alert('Repositório não encontrado')
+                            }
+                        }
+                    }
+                }else{
+                    alert('Informe o nome do usuário')
+                }
+                loadElement.style.visibility = 'visible'
+            }
+        </script>
+    </body>
+</html>
