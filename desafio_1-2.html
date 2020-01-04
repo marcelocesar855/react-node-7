@@ -14,10 +14,15 @@
             <div id='exec1' class="exec">
                 <button onclick="createBox()">Adicionar box</button>
             </div>
+            <div id='exec3' class="exec">
+            </div>
+            <div id='exec4' class="exec">
+                <input type="text" id="nome">
+                <button onclick="adicionar()">Adicionar nome</button>
+            </div>
         </div>
         <script>
             var id = 1
-
             function createBox() {
                 var boxElement = document.createElement('div')
                 boxElement.style.width = 100;
@@ -45,6 +50,30 @@
                 }
                 return color;
             }
+
+            function createList() {
+                var nomes = ["Diego", "Gabriel", "Lucas"];
+                var listElement = document.createElement('ul')
+                for (i = 0; i < nomes.length; i++) {
+                    var listItem = document.createElement('li')
+                    var textItem = document.createTextNode(nomes[i])
+                    listItem.appendChild(textItem)
+                    listElement.appendChild(listItem)
+                }
+                var containerElement = document.querySelector('#exec3')
+                containerElement.appendChild(listElement)
+            }
+
+            function adicionar() {
+                var nome = document.getElementById('nome').value
+                var listItem = document.createElement('li')
+                var textItem = document.createTextNode(nome)
+                listItem.appendChild(textItem)
+                var containerElement = document.querySelector('div#app div#exec3 ul')
+                containerElement.appendChild(listItem)
+                document.getElementById('nome').value = ''
+            }
+            createList()
         </script>
     </body>
 </html>
