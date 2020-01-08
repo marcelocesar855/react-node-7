@@ -126,3 +126,11 @@ const usuario3 = {...usuario1, endereco : {
 console.log(usuario2)
 
 console.log(usuario3)
+
+const usuario4 = {
+ nome,
+ idade,
+ cidade: 'Rio do Sul',
+};
+
+console.log(usuario4)
